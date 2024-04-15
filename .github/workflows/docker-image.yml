@@ -27,9 +27,9 @@ jobs:
         echo "Fin del logIn"
     - name: Build docker image
       run: |
-        docker build --tag fernando26dev/docker-githubactions:1.0.1 .
+        docker build -t fernando26dev/docker-githubactions:1.0.1 .
     - name: Push docker image
       run: |
-        docker push fernando26dev/docker-githubactions:1.0.1 .
+        docker push fernando26dev/docker-githubactions:1.0.1
 #    - name: Build the Docker image
 #      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
