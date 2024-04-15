@@ -28,8 +28,10 @@ jobs:
     - name: Build docker image
       run: |
         docker build -t fernando26dev/docker-githubactions:1.0.1 .
+        docker build -t fernando26dev/docker-githubactions:latest .
     - name: Push docker image
       run: |
         docker push fernando26dev/docker-githubactions:1.0.1
+        docker push fernando26dev/docker-githubactions:latest
 #    - name: Build the Docker image
 #      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
