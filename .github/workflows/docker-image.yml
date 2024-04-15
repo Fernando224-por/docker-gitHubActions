@@ -31,24 +31,26 @@ jobs:
       env:
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
         DOCKER_USER: ${{secrets.DOCKER_USER}}
-        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
         echo "Iniciando logIn"
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
         echo "Fin del logIn"
-        echo "New Version $NEW_VERSION!!!!!!!!!!!"
         
-    #- name: Build docker image
-    #  run: |
-    #    docker build -t fernando26dev/docker-githubactions:1.0.1 .
-    #    docker build -t fernando26dev/docker-githubactions:latest .
-
+    - name: Build docker image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+       docker build -t fernando26dev/docker-githubactions:$NEW_VERSION .
+       docker build -t fernando26dev/docker-githubactions:latest .
+       echo "version: $ NEW_VERSION"
     
-    #- name: Push docker image
-    #  run: |
-    #    docker push fernando26dev/docker-githubactions:1.0.1
-    #    docker push fernando26dev/docker-githubactions:latest
-
+    - name: Push docker image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        docker push fernando26dev/docker-githubactions:$NEW_VERSION
+        docker push fernando26dev/docker-githubactions:latest
+        echo "version: $ NEW_VERSION"
     
 #    - name: Build the Docker image
 #      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
